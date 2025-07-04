@@ -36,11 +36,12 @@ pipeline {
 		stage('Push Image to DockerHub'){
 			steps {
 				script {
-					echo 'pushing docker image to DockerHub...'
-					docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}"){
-						dockerImage.push('latest')
-						}
-					}
+     				 echo 'Pushing Docker image to local registry...'
+     				 sh '''
+        			 docker tag iquantc/iquant-app:latest localhost:5000/iquant-app:latest
+       				 docker push localhost:5000/iquant-app:latest
+      				 '''
+    				}
 				}
 			}
 		stage('Install Kubectl & ArgoCD CLI'){
