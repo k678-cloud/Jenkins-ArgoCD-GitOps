@@ -18,6 +18,11 @@ pipeline {
 				sh 'npm install'
 			}
 		}
+		stage('CodeQL'){
+			withCodeQL(codeql: 'CodeQL 2.5.5'){
+				sh 'codeql --version'
+			}
+		}
 		stage('Build Docker Image'){
 			steps {
 				script {
