@@ -19,8 +19,10 @@ pipeline {
 			}
 		}
 		stage('CodeQL'){
-			withCodeQL(codeql: 'CodeQL 2.5.5'){
-				sh 'codeql --version'
+			steps {
+				withCodeQL(codeql: 'CodeQL 2.5.5'){
+					sh 'codeql --version'
+				}
 			}
 		}
 		stage('Build Docker Image'){
